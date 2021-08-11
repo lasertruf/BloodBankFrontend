@@ -1,0 +1,210 @@
+
+<div *ngIf="gotdata">  
+  <h2 style="padding-left: 15%;">Welcome to Lorem Ipsum Blood Bank</h2>
+
+        <div cdkDropList  
+        #dragarea="cdkDropList"
+        [cdkDropListConnectedTo] = "droparea"
+        [cdkDropListData] ="BGI"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let bg of BGI" class="innerw"   cdkDrag >
+          
+          <div  [ngClass]="{ 'BGboxd ': bg.isDonor, 'BGbox': !bg.isDonor}">
+             {{bg.BGname}}    
+          </div>
+
+          <div class="BGitem">
+              {{bg.BGitem}}
+          </div>    
+
+       </div>
+       
+   </div>
+
+
+    
+<!-- BLOOD GROUP AND BOTTLE RESPONSE FORM BELOW -->
+<div class="bucketWrapper">
+<div>  
+  
+<form > 
+<!-- <h2>Select Blood Group Required</h2>   -->
+
+<h2>RESPONSE FORM</h2>
+<mat-form-field appearance="fill">
+    <mat-label>Select Blood Group Required</mat-label>
+    <select matNativeControl [(ngModel)]="selectedBG" name="bg">
+      <option value="" selected></option>
+      <option *ngFor="let bg of BGI" [value]="bg.BGname">
+        {{bg.BGname}}
+      </option>
+    </select>
+  </mat-form-field>
+  <p> Selected Blood Group: {{selectedBG}} </p>
+
+
+<!-- <h2>Select Bottles Required</h2>   -->
+<mat-form-field appearance="fill">
+    <mat-label>Select Bottles Required</mat-label>
+    <select matNativeControl [(ngModel)]="selectedBot"  name="bot">
+      <option value="" selected></option>
+      <option *ngFor="let bot of Bottles" [value]="bot">
+        {{bot}}
+      </option>
+    </select>
+  </mat-form-field>
+  <p> Selected Number of Bottles: {{selectedBot}} </p>
+
+  <button  type="button" mat-raised-button (click)="BGMatcher()" >  FIND DONORS </button>
+     
+  </form>
+      
+ </div>
+ <!-- BLOOD GROUP AND BOTTLE RESPONSE FORM ABOVE -->
+
+
+
+ <!-- BUCKET LOGIC BELOW -->
+
+<div  >
+
+    <h2>BUCKET AREA</h2>
+
+      <div class="rect" cdkDropList 
+      [cdkDropListConnectedTo] = "dragarea"
+      [cdkDropListData] ="bucketarr"
+      #droparea="cdkDropList"
+      (cdkDropListDropped)="drop($event) " >
+      
+      
+      <div cdkDrag *ngFor="let ls of bucketarr" style="display: flex;" >
+        
+        <div class="Bucketbox">   {{ls.BGname}} </div> 
+        <div class="Bucketitem">   {{ls.BGitem}} </div> 
+        
+      </div>
+      
+      </div>
+      <br>
+      <button type="button" mat-raised-button (click)="reset()">RESET</button>
+</div>
+
+
+<!-- BUCKET LOGIC ABOVE-->
+
+</div>
+<!-- BUCKET WRAPPER DIV ENDS ABOVE -->
+
+   
+</div> 
+<!-- GOTDATA == TRUE LOGIC ABOVE -->
+
+
+
+
+
+
+<!-- FORM TO GET THE BLOOD BANK RECORDS STARTS BELOW  -->
+
+<div  class="dataentry" *ngIf="gotdata == false">
+      <h2>Enter The Blood Bank Records</h2>
+    
+    <form [formGroup]="BBForm" style=" min-width: 150px;
+    max-width: 500px; width: 100%" validate>
+            
+      <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>A+ Blood Group</mat-label>
+        <input matInput type="number"  placeholder="Bottles In Stock "  formControlName="0">
+       </mat-form-field>
+
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>A- Blood Group</mat-label>
+        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="1">
+       </mat-form-field>
+
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>B+ Blood Group</mat-label>
+        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="2">
+       </mat-form-field>
+       
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>B- Blood Group</mat-label>
+        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="3">
+       </mat-form-field>
+
+       
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>AB+ Blood Group</mat-label>
+        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="4">
+       </mat-form-field>
+       
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>AB- Blood Group</mat-label>
+        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="5">
+       </mat-form-field>
+
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label > O+ Blood Group</mat-label>
+        <input   matInput type="number" placeholder="Bottles In Stock "  formControlName="6">
+       </mat-form-field>
+       
+       <mat-form-field class="inputdiv" appearance="fill">
+        <mat-label>O- Blood Group</mat-label>
+        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="7">
+       </mat-form-field>
+
+        <!-- <p>
+          <label for="AP">A+ </label>
+          <input matInput type="number" formControlName="0">
+        </p>
+     
+        <p>
+          <label for="AN">A- </label>
+          <input type="number"formControlName="1">
+        </p>
+
+        <p>
+            <label for="BP">B+ </label>
+            <input type="number"  formControlName="2">
+          </p>
+       
+          <p>
+            <label for="BN">B- </label>
+            <input type="number"  formControlName="3">
+          </p>
+          <p>
+            <label for="ABP">AB+ </label>
+            <input type="number" formControlName="4">
+          </p>
+       
+          <p>
+            <label for="ABN">AB- </label>
+            <input type="number" formControlName="5">
+          </p>
+          <p>
+            <label for="OP">O+ </label>
+            <input type="number"  formControlName="6">
+          </p>
+       
+          <p>
+            <label for="ON">O- </label>
+            <input type="number" formControlName="7">
+          </p>
+         -->
+         
+    </form>
+
+
+<br><br>
+ <button class="submitbtn" mat-raised-button (click)="BBdata()"> SUBMIT</button>
+ <button class="submitbtn" mat-raised-button (click)="BBautodata()"> AUTOFILL </button>
+<!-- <p>subdata {{subdata}}</p>  -->
+  
+  <!-- <button mat-stroked-button (click)="openSnackBar()">Show snack-bar</button> -->
+  
+
+
+</div>
+
+
+

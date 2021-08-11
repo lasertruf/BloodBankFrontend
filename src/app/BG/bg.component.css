@@ -1,0 +1,147 @@
+.dataentry{
+  padding: 50px;
+  /* background-color: rgb(103, 139, 168); */
+  background-color: rgb(207, 207, 207);
+  
+  min-height: 550px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgba(32, 16, 34, 0.849);
+  align-content:center;
+  padding-left: 30%;
+  
+}
+
+.submitbtn{
+width: 410px;
+background-color: rgb(158, 149, 233);
+}
+
+.inputdiv{
+  color: rgb(44, 44, 44);
+  background-color: rgb(235, 234, 241);
+}
+
+
+.wrapper{
+
+    width: 400px;
+    grid-gap: 10px;
+    display: grid;
+    text-align-last :center;
+}
+
+.bucketWrapper{
+  padding: 50px;
+  width: 800px;
+  grid-gap: 20px;
+  display: grid;
+  
+
+}
+
+.rect{
+  border-style: dotted;
+  border-width: 2px;
+  min-height: 220px;
+  min-width: 250px;
+  /* background-color: rgb(148, 145, 145); */
+}
+.innerw{
+   
+        
+        width: 160px;
+        height:50px;
+        padding: 10px;
+        grid-gap: 5px;
+        display: grid;
+        text-align-last :center;
+    
+}
+
+.BGbox{
+    
+    padding: 20px;
+    
+    background-color: lightgreen;
+}
+.Bucketbox{
+    
+  padding: 20px;
+  max-height: 10px;
+  
+  background-color: green;
+}
+
+.BGboxd{
+    
+  padding: 20px;
+  
+  background-color: green;
+}
+
+
+.BGitem{
+ 
+    background-color: lightgrey;
+    padding: 20px;
+}
+.Bucketitem{
+ 
+  background-color: lightgrey;
+  padding: 20px;
+  max-height: 10px;
+  
+}
+
+@media (min-width: 900px) {
+  .wrapper{
+     
+    grid-template-columns: repeat(4,1fr);
+    
+    
+  }  
+  .innerw{
+
+  
+    
+    grid-template-columns: 1fr .5fr;
+    
+
+  }
+  .bucketWrapper{
+     
+    grid-template-columns: repeat(2,1fr);
+    padding-top: 100px;
+    
+    
+  }  
+
+  .cdk-drop-list{
+  
+    grid-template-columns: repeat(4,1fr);
+  }
+  .submitbtn{
+    width:410px;
+      }
+
+
+}
+
+@media (min-width:400px){
+  .submitbtn{
+width:205px;
+  }
+}
+
+
+
+
+
+.cdk-drop-list{
+        width: 160px;
+        height:50px;
+        padding: 10px;
+        grid-gap: 5px;
+        display: grid;
+        text-align-last :center;
+}
