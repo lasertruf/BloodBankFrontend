@@ -111,45 +111,70 @@
     <form [formGroup]="BBForm" style=" min-width: 150px;
     max-width: 500px; width: 100%" validate>
             
-      <mat-form-field class="inputdiv" appearance="fill">
+      <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>A+ Blood Group</mat-label>
-        <input matInput type="number"  placeholder="Bottles In Stock "  formControlName="0">
-       </mat-form-field>
+        <input matInput type="number"  min="1" max="99" placeholder="Bottles 1-99"  formControlName="0" required OnlyNumber="true">
+      <mat-error>
+        Required number 1-99
+      </mat-error> 
+      </mat-form-field>
 
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>A- Blood Group</mat-label>
-        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="1">
+        <input matInput type="number"  min="1" max="99" placeholder="Bottles 1-99" required formControlName="1">
+        <mat-error>
+          Required number 1-99
+        </mat-error> 
        </mat-form-field>
 
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>B+ Blood Group</mat-label>
-        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="2">
+        <input matInput type="number"  min="1" max="99" placeholder="Bottles 1-99" required formControlName="2">
+        <mat-error>
+          Required number 1-99
+        </mat-error> 
        </mat-form-field>
        
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>B- Blood Group</mat-label>
-        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="3">
+        <input matInput type="number"  min="1" max="99" placeholder="Bottles 1-99 " required formControlName="3">
+        <mat-error>
+          Required number 1-99
+        </mat-error> 
        </mat-form-field>
 
        
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>AB+ Blood Group</mat-label>
-        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="4">
+        <input matInput type="number"  min="1" max="99" placeholder="Bottles 1-99 "  required formControlName="4">
+        <mat-error>
+          Required number 1-99
+        </mat-error> 
        </mat-form-field>
        
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>AB- Blood Group</mat-label>
-        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="5">
+        <input matInput type="number"  min="1" max="99" placeholder="Bottles 1-99 " required formControlName="5">
+        <mat-error>
+          Required number 1-99
+        </mat-error> 
        </mat-form-field>
 
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label > O+ Blood Group</mat-label>
-        <input   matInput type="number" placeholder="Bottles In Stock "  formControlName="6">
+        <input   matInput type="number"  min="1" max="99" placeholder="Bottles 1-99 " required formControlName="6">
+        <mat-error >
+          Required number 1-99
+        </mat-error> 
        </mat-form-field>
        
-       <mat-form-field class="inputdiv" appearance="fill">
+       <mat-form-field class="inputdiv" appearance="outline">
         <mat-label>O- Blood Group</mat-label>
-        <input matInput type="number" placeholder="Bottles In Stock "  formControlName="7">
+        <input matInput  type="number"  min="1" max="99" required placeholder="Bottles 1-99 " required  formControlName="7">
+        <mat-error >
+          Required number 1-99
+        </mat-error>
+       
        </mat-form-field>
 
         <!-- <p>

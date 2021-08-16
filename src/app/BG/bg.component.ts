@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BGdata } from '../BG.model';
-import {FormControl,FormGroup,NgModel, FormBuilder} from '@angular/forms'
+import {FormControl,FormGroup,NgModel, FormBuilder, Validators} from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {CdkDragDrop, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-drop';
 
@@ -36,7 +36,7 @@ sum : number = 0;
   constructor(
     private _snackBar: MatSnackBar,private fb: FormBuilder,
   ) { }
-
+   
 
   BBForm = this.fb.group({
     0: [''],
@@ -48,6 +48,15 @@ sum : number = 0;
     6: [''],
     7: [''],
     });
+
+BGF = new FormControl('', [
+  Validators.required,
+  Validators.pattern("^[0-9]*$"),
+]);
+
+    
+
+
 
   ngOnInit(): void {
 
@@ -66,12 +75,13 @@ this.Bottles = ['1','2','3','4','5','6','7','8','9','10'];
 
 
 
-
 }
 
 gotData(){
 
-if(this.BBForm.value[7]!=0)
+
+  if(this.BBForm.value[7]!=0)
+
 console.log(this.BGI);
 
 
@@ -82,7 +92,9 @@ console.log(this.BGI);
 }
 
 BBdata()
-{
+{    if(this.BBForm.invalid){
+  return;
+}
       
     this.gotData();
    
