@@ -1,4 +1,3 @@
-
 <div *ngIf="gotdata">  
   <h2 style="padding-left: 15%;">Welcome to Lorem Ipsum Blood Bank</h2>
 
@@ -77,7 +76,7 @@
       (cdkDropListDropped)="drop($event) " >
       
       
-      <div cdkDrag *ngFor="let ls of bucketarr" style="display: flex;" >
+      <div cdkDrag *ngFor="let ls of bucketarr" style="display: flex ; flex-direction: column;" >
         
         <div class="Bucketbox">   {{ls.BGname}} </div> 
         <div class="Bucketitem">   {{ls.BGitem}} </div> 

@@ -14,8 +14,14 @@ import {CdkDragDrop, moveItemInArray,transferArrayItem} from '@angular/cdk/drag-
 
 
 export class BGComponent implements OnInit {
+filled: boolean = false;
   selectedBG!: string;
   selectedBot!: number;
+  bottlesVar!: number;
+  availableBot!: number;
+  eventBG !: string;
+sum : number = 0;
+  qty:number = 0;
   subdata!: string;
   gotdata : boolean = false;
   donorSet : boolean = false;
@@ -98,6 +104,8 @@ openSnackBar() {
 
 
 BGMatcher(){
+  this.bottlesVar = this.selectedBot ;
+
 
   console.log(this.selectedBG);
   if(this.donorSet){
@@ -109,8 +117,7 @@ BGMatcher(){
   {    //  A+,A-,O+,O-
       for (let index = 0; index < this.BGI.length; index++) {
 
-        if((this.BGI[index].BGitem>=this.selectedBot) &&
-         (this.BGI[index].BGname=="A+"|| this.BGI[index].BGname=="A-"||
+        if((this.BGI[index].BGname=="A+"|| this.BGI[index].BGname=="A-"||
          this.BGI[index].BGname=="O+"||this.BGI[index].BGname=="O-")){
               this.BGI[index].isDonor=true;
               this.donorSet=true;
@@ -120,10 +127,9 @@ BGMatcher(){
 
 
   if(this.selectedBG=="A-")
-  {    //A-,O-
+  {    
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot) &&
-         (this.BGI[index].BGname=="A-"|| this.BGI[index].BGname=="O-")){
+        if((this.BGI[index].BGname=="A-"|| this.BGI[index].BGname=="O-")){
             this.BGI[index].isDonor=true;
             this.donorSet=true;
         }
@@ -132,9 +138,9 @@ BGMatcher(){
 
 
   if(this.selectedBG=="B+")
-  {    //A-,O-
+  {   
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot) &&
+        if(
          (this.BGI[index].BGname=="B+"|| this.BGI[index].BGname=="B-"||
          this.BGI[index].BGname=="O+"||this.BGI[index].BGname=="O-")){
             this.BGI[index].isDonor=true;
@@ -146,7 +152,7 @@ BGMatcher(){
   if(this.selectedBG=="B-")
   {    //A-,O-
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot) &&
+        if(
          (this.BGI[index].BGname=="B-"|| this.BGI[index].BGname=="O-"
         )){
             this.BGI[index].isDonor=true;
@@ -158,7 +164,8 @@ BGMatcher(){
   if(this.selectedBG=="AB+")
   {    
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot)){
+        // if((this.BGI[index].BGitem>=this.selectedBot))
+        {
             this.BGI[index].isDonor=true;
             this.donorSet=true;
         }
@@ -169,7 +176,7 @@ BGMatcher(){
   if(this.selectedBG=="AB-")
   {    
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot) &&
+        if(
          (this.BGI[index].BGname=="AB-"|| this.BGI[index].BGname=="B-"||
          this.BGI[index].BGname=="O-"||this.BGI[index].BGname=="A-")){
             this.BGI[index].isDonor=true;
@@ -181,7 +188,7 @@ BGMatcher(){
   if(this.selectedBG=="O+")
   {    
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot) &&
+        if(
          (this.BGI[index].BGname=="O-"||this.BGI[index].BGname=="O+")){
             this.BGI[index].isDonor=true;
             this.donorSet=true;
@@ -192,7 +199,7 @@ BGMatcher(){
   if(this.selectedBG=="O-")
   {    
       for (let index = 0; index < this.BGI.length; index++) {
-        if((this.BGI[index].BGitem>=this.selectedBot) && (this.BGI[index].BGname=="O-")){
+        if( (this.BGI[index].BGname=="O-")){
             this.BGI[index].isDonor=true;
             this.donorSet=true;
         }
@@ -207,9 +214,22 @@ drop(event: CdkDragDrop<any>) {
 
 
 
-  if(this.bucketarr.length>0){
-    return;
-  }
+if(this.filled){
+  return;
+}
+
+// if(this.sum>=this.selectedBot){
+//   console.log("sum:"+ this.sum);
+  
+  
+//   return;
+// }
+  
+
+
+  // if(this.bucketarr.length>0){
+  //   return;
+  // }
   
   // console.log(event.previousContainer.data[6].isDonor);
   if(event.previousContainer.data[event.previousIndex].isDonor){
@@ -218,24 +238,74 @@ drop(event: CdkDragDrop<any>) {
   if (event.previousContainer === event.container) {
     moveItemInArray(this.BGI, event.previousIndex, event.currentIndex);
   } else {
+           
            this.pos = event.previousIndex;
+           this.availableBot = event.previousContainer.data[event.previousIndex].BGitem;
+           this.eventBG =  event.previousContainer.data[event.previousIndex].BGname;
 
     transferArrayItem(event.previousContainer.data,
                       event.container.data,
                       event.previousIndex,
                       event.currentIndex);
-                      
-                    
+                                          
   }
   
-  this.bucketarr[0].BGitem=this.bucketarr[0].BGitem - this.selectedBot;
-var arr : BGdata = {'BGname' : this.bucketarr[0].BGname ,'BGitem' :this.bucketarr[0].BGitem ,'isDonor' : true };
- console.log(this.pos);
+
+ 
+  
+  if(this.availableBot<=this.bottlesVar){
+  this.bottlesVar = this.bottlesVar - this.availableBot ;
+  // this.bucketarr[this.qty].BGitem=this.bucketarr[this.qty].BGitem - this.availableBot;
+
+
+
+  var arr : BGdata = {'BGname' : this.eventBG ,'BGitem' :0 ,'isDonor' : false };
+  this.BGI.splice(this.pos,0,arr);
+
+  for (let index = 0; index < this.bucketarr.length; index++) {
+    if(this.bucketarr[index].BGname == this.eventBG)
+    {
+      this.bucketarr[index].BGitem=this.availableBot;
+    //  this.filled = true;
+    }   
+  // this.bucketarr[this.qty].BGitem = this.availableBot;
+  // this.qty++;
+
+  }
+       }
+ 
+ 
+ else if( this.availableBot>this.bottlesVar){
+  // this.bucketarr[this.qty].BGitem=this.bucketarr[this.qty].BGitem - this.bottlesVar;
+  var temp1 : number = 0;
+  temp1 = this.availableBot;
+  this.availableBot = this.availableBot - this.bottlesVar;
+this.bottlesVar = this.bottlesVar - this.availableBot;
+
+  var arr : BGdata = {'BGname' : this.eventBG ,'BGitem' :this.availableBot ,'isDonor' : true };
+//  console.log(this.pos);
  this.BGI.splice(this.pos,0,arr);
  
- this.bucketarr[0].BGitem = this.selectedBot;
+ for (let index = 0; index < this.bucketarr.length; index++) {
+                   if(this.bucketarr[index].BGname == this.eventBG)
+                   {
+                     this.bucketarr[index].BGitem=temp1 - this.availableBot;
+                     this.filled = true;
+                   }   
+ }
+  this.qty++;
 
-  // for (let index = 0; index < this.BGI.length; index++) {
+}
+
+
+  
+for (let index = 0; index < this.bucketarr.length; index++) {
+  this.sum = this.sum + this.bucketarr[index].BGitem;
+
+}
+
+
+// for (let index = 0; index < this.BGI.length; index++) {
   //   if(this.BGI[index].BGname==this.bucketarr[0].BGname){
   //         this.BGI[index].BGitem = this.BGI[index].BGitem - this.selectedBot;
   //         this.BGI[this.pos].BGitem = this.BGI[this.pos].BGitem - this.selectedBot;   
@@ -252,7 +322,9 @@ var arr : BGdata = {'BGname' : this.bucketarr[0].BGname ,'BGitem' :this.bucketar
 BBautodata(){
 this.isautofilled=true;
   this.gotdata=true;
+  
 }
+
 resetDonor(){
   this.bucketarr=[];
  
@@ -262,14 +334,22 @@ resetDonor(){
     
   }
 
+
+  if(this.sum>this.selectedBot){
+     this.bucketarr.pop();
+  }
+
 }
+
 reset()
-{
+{ this.filled = false;
+  this.sum = 0;
 
   if(this.isautofilled){
   this.selectedBG = '';
   this.selectedBot = 0;
-    this.resetDonor();
+  
+  this.resetDonor();
 
     this.BGI = [
       {BGname:"A+",BGitem:30,isDonor:false},{BGname:"B+",BGitem:30,isDonor:false},
