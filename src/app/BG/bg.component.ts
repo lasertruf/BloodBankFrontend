@@ -270,6 +270,15 @@ reset()
   this.selectedBG = '';
   this.selectedBot = 0;
     this.resetDonor();
+
+    this.BGI = [
+      {BGname:"A+",BGitem:30,isDonor:false},{BGname:"B+",BGitem:30,isDonor:false},
+      {BGname:"A-",BGitem:30,isDonor:false},{BGname:"B-",BGitem:30,isDonor:false},
+      {BGname:"AB+",BGitem:30,isDonor:false},{BGname:"AB-",BGitem:30,isDonor:false},
+      {BGname:"O+",BGitem:30,isDonor:false},{BGname:"O-",BGitem:30,isDonor:false}
+      
+      ];
+      
   }
 
   else{
